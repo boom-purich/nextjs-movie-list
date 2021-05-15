@@ -1,15 +1,30 @@
-@import '../assets/font/circular_std_font/circular_std_font.css';
-@import './color';
+@import "../assets/font/circular_std_font/circular_std_font.css";
+@import "color";
 // @import "../../node_modules/@fortawesome/fontawesome-free/css/all.css";
 @import "../node_modules/@fortawesome/fontawesome-free/css/all.css";
 @import "../public/bootstrap-4.6.0/dist/css/bootstrap.min.css";
+@import "../node_modules/slick-carousel/slick/slick-theme.scss";
+@import "../node_modules/slick-carousel/slick/slick.scss";
 
 html,
 body {
   padding: 0;
   margin: 0;
-  font-family: Circular Std Book,Circular Std;
-  background-color: $white-solitude;
+  font-family: Circular Std Book, Circular Std;
+  background-color: $black-chinese;
+  width: 100%;
+  height: 100%;
+  scroll-behavior: smooth;
+}
+
+// @media screen and (orientation: landscape) {
+//   html {
+//     overflow: hidden;
+//   }
+// }
+
+#__next {
+  height: 100%;
 }
 
 a {
@@ -19,4 +34,124 @@ a {
 
 * {
   box-sizing: border-box;
+  -webkit-overflow-scrolling: touch
 }
+
+:focus-visible {
+  outline: none;
+}
+
+.trend_card_group {
+  .slick-list .slick-track {
+    display: flex;
+    align-items: flex-start;
+    flex-wrap: nowrap;
+    margin: 0;
+  }
+
+  .slick-list {
+    position: relative;
+
+    .slick-track {
+      .trend_card_content {
+        &:active,&:focus {
+          outline-color: transparent !important;
+          outline-style: none !important;
+          outline-width: 0px !important;
+        }
+      }
+    }
+
+    &::after {
+      content: "";
+      position: absolute;
+      height: 100%;
+      bottom: 0;
+      z-index: 1;
+      width: 100px;
+      background: linear-gradient(to right,transparent,$black-chinese);
+      right: 0;
+      
+      @media only screen and (max-width:577px) {
+        width: 60px;
+      }
+
+    }
+  }
+}
+
+.movie_card_group {
+  .slick-list .slick-track {
+    display: flex;
+    align-items: flex-start;
+    flex-wrap: nowrap;
+    margin: 8px 16px;
+  }
+
+  .slick-list {
+    position: relative;
+
+    .slick-track {
+      .trend_card_content {
+        &:active,&:focus {
+          outline-color: transparent !important;
+          outline-style: none !important;
+          outline-width: 0px !important;
+        }
+      }
+    }
+
+    &::after {
+      content: "";
+      position: absolute;
+      height: 100%;
+      bottom: 0;
+      z-index: 1;
+      width: 100px;
+      background: linear-gradient(to right,transparent,$black-chinese);
+      right: 0;
+      
+      @media only screen and (max-width:577px) {
+        width: 60px;
+      }
+
+    }
+  }
+}
+
+.nav-hamburger-btn {
+  &:active,&:focus {
+    outline-color: transparent !important;
+    outline-style: none !important;
+    outline-width: 0px !important;
+  }
+}
+
+input {
+  &::-webkit-input-placeholder {
+    line-height: normal;
+  }
+
+  &:focus-visible {
+    outline: none;
+  }
+}
+
+
+
+.ReactModal__Overlay {
+  opacity: 0;
+  transform: translateY(-100px);
+  transition: all 0.3s ease-in-out;
+}
+
+.ReactModal__Overlay--after-open {
+  opacity: 1;
+  transform: translateY(0px);
+}
+
+.ReactModal__Overlay--before-close {
+  opacity: 0;
+  transform: translateY(-100px);
+}
+

@@ -1,10 +1,21 @@
 @import "styles/color";
 
+.navbar_container,.navbar_modal_container {
+  @media only screen and (max-width:767px) {
+    padding: 0px 24px;
+  }
+
+  padding: 0px 50px;
+}
+
 .navbar_container {
   height: 95px;
-  // background-color: $white-solitude;
-  padding: 0px 5vw;
+  // background: transparent;
+  background: linear-gradient(to bottom,rgba(0,0,0,.7) 10%,rgba(0,0,0,0));
   display: flex;
+  position: absolute;
+  width: 100%;
+  z-index: 10;
 }
 
 .navbar_shadow {
@@ -16,6 +27,8 @@
   display: flex;
   align-items: center;
   width: 100%;
+  z-index: 1;
+  height: 48px;
 }
 
 .navbar_banner_container {
@@ -27,10 +40,63 @@
   .banner_word {
     margin-left: 1.25rem;
     font-size: 20px;
-    font-weight: 600;
-    letter-spacing: 0.5px;
-    color: $black;
+    letter-spacing: 1px;
+    color: $white-solitude;
     user-select: none;
+    white-space: nowrap;
+    // color: $red;
+    font-family: Circular Std;
+  }
+}
+
+.navbar_logo_container {
+  
+  .navbar_logo {
+   width: 44px;
+   @media only screen and (max-width: 576px) {
+    width: 38px;
+  }
+   object-fit: contain;
+  }
+}
+
+.navbar_profile_btn_group_container {
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+  height: 100%;
+}
+
+.navbar_profile_container {
+  margin-right: 1.25rem;
+  height: 100%;
+}
+
+.profile_btn {
+  border-radius: 50%;
+  border: 2px solid $white-solitude;
+  background: transparent;
+  height: 100%;
+  width: 48px;
+  position: relative;
+  transition: transform 0.15s ease 0s;
+
+  .profile_img_btn {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    object-fit: cover;
+    background-position: center center;
+    padding: 4px;
+  }
+
+  &:hover,&:active {
+    transform: scale(1.05);
+    background: rgba($color: $white-solitude, $alpha: .25);
   }
 }
 
@@ -64,7 +130,7 @@
     border: none;
     background-color: transparent;
     //background-color: $white-solitude;
-    color: $black;
+    color: $white-solitude;
     font-family: Circular Std Book;
     font-weight: 600;
     //border-radius: 20px;
@@ -84,12 +150,13 @@
       left: 50%;
       bottom: 0;
       height: 2px;
-      background-color: $red;
+      background-color: #ff0b27;
       transition: width 0.3s ease 0s, left 0.3s ease 0s;
     }
 
     &:hover {
-      color: $red;
+      color: #ff0b27;
+      
 
       &::after {
         width: 100%;
@@ -110,20 +177,17 @@
   height: 30px;
   display: flex;
   cursor: pointer;
-  background-color: #fff;
+  background-color: transparent;
+  // background-color: #fff;
   .bar_icon {
     margin: auto;
     font-size: 22px;
-    color: $black;
-    transform: rotate(180deg);
-    transition: transform 1s ease-in-out 0s;
+    color: $white-solitude;
+    // transform: rotate(360deg);
+    // transition: transform 0.5s ease-in-out 0s;
   }
 
-  &:active,&:focus {
-    .bar_icon {
-      transform: rotate(360deg);
-    }
-  }
+  
 }
 
 .mobile_toggle_container {
@@ -133,7 +197,7 @@
   border: none !important;
   border-radius: 9px !important;
   padding: 16px 14px !important;
-  top: calc(0% + 44px) !important;
+  top: calc(0% + 32px) !important;
   right: 0 !important;
   left: auto !important;
   width: clamp(200px, 100%, 250px) !important;
@@ -141,7 +205,8 @@
   z-index: 1;
   font-size: 15px !important;
   letter-spacing: 0.25px;
-  color:#373737 !important;
+  color: #373737 !important;
+  z-index: 1;
 
   .toggle_list {
     display: flex;
@@ -170,3 +235,247 @@
 
 .navbar_user_btn_container {
 }
+
+@keyframes pushDown {
+  0% {
+    top: -100%;
+    opacity: 0;
+  }
+
+  100% {
+    top: 0;
+    opacity: 1;
+  }
+}
+
+@keyframes pushUp {
+  0% {
+    top: 0;
+    opacity: 1;
+    
+  }
+
+  100% {
+    top: -100%;
+    opacity: 0;
+  }
+}
+
+.open_modal {
+  animation: pushDown .3s ease;
+}
+
+.close_modal {
+  animation: pushUp .3s ease;
+}
+
+
+.navbar_modal_container {
+  position: absolute;
+  // top: 0;
+  left: 0;
+  width: 100%;
+  background: $black-chinese;
+  max-height: 500px;
+  height: auto;
+  padding-top: 100px;
+  padding-bottom: 24px;
+  transition: transform 0.3s ease 0s;
+  border-bottom: 1px solid rgba($color: $white-solitude, $alpha: .3);
+
+
+
+  @media only screen and (max-width:576px) {
+    padding-top: 80px;
+  }
+
+  // &::after {
+  //   content: "";
+  //   position: absolute;
+  //   top: 100%;
+  //   left: 0;
+  //   width: 100%;
+  //   height: 32px;
+  //   background: linear-gradient($black-chinese,transparent);
+  // }
+}
+
+.find_movie_word {
+  margin:  16px 0px;
+  color: $white-solitude;
+  font-family: Circular Std;
+  font-size: 20px;
+  letter-spacing: .5px;
+  position: relative;
+
+  &::after {
+    content: "";
+    position: absolute;
+    height: 5px;
+    width: 20px;
+    background: $red;
+    left: 0;
+    top: calc(100% + 4px);
+  }
+
+}
+
+.modal_search_container {
+  // margin-bottom: 24px;
+  // margin-top: 10px;
+  // padding: 10px 0px;
+  // border: 1px solid rgba($color: $white-solitude, $alpha: .8);
+  border-radius: 50px;
+  //border-top: 1px solid $white-solitude;
+  color: $white-solitude;
+  letter-spacing: .25px;
+  height: 50px;
+
+  @media only screen and (max-width:576px) {
+    height: 50px;
+  }
+  // border-bottom: 1px solid $white-solitude;
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+
+  .search_btn,.clear_btn {
+    background: none;
+    border: none;
+    color: $white-solitude;
+    @media only screen and (max-width:576px) {
+      font-size: 14px;
+    }
+  }
+
+  .search_field {
+    flex: 1 1 auto;
+    margin: 0 1rem;
+    height: 100%;
+    background: none;
+    border: none;
+    color: $white-solitude;
+    font-family: Circular Std;
+    line-height: normal;
+    font-size: 16px;
+    letter-spacing: .25px;
+
+    @media only screen and (max-width:576px) {
+      font-size: 16px;
+    }
+
+    &::placeholder {
+      font-family: Circular Std Book;
+      letter-spacing: .25px;
+      color: rgba($color: $white-solitude, $alpha: .5);
+    }
+
+    &:focus,&:active {
+      outline: none;
+      box-shadow: none;
+    }
+  }
+  
+}
+
+.modal_btn_group_container,.modal_btn_logout {
+  padding-top: 10px;
+
+  @media only screen and (max-width:576px) {
+    font-size: 14px;
+    button {
+      padding: 8px;
+    }
+  }
+
+  button {
+    background: transparent;
+    border: none;
+    //border: 1px solid $white-solitude ;
+    color: $white-solitude;
+    white-space: nowrap;
+    //border-radius: 50px;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    letter-spacing: .25px;
+    transition: background 0.3s ease 0s;
+    font-family: Circular Std;
+    
+
+    .login_logo {
+      margin-right: .5rem;
+    }
+    &:hover {
+      //background: $red;
+      //border: 1px solid $red;
+    }
+  }
+}
+
+.modal_btn_group {
+  margin-top: 10px;
+}
+
+.modal_btn_option {
+  border-top: 1px solid rgba($color: $white-solitude, $alpha: .3);
+  padding: 16px 8px;
+  color: $white-solitude;
+  background: transparent;
+  letter-spacing: .25px;
+  display: flex;
+  font-size: 16px;
+  align-items: center;
+  flex-wrap: nowrap;
+  transition: background 0.8s ease 0s;
+  cursor: pointer;
+
+  @media only screen and (max-width:576px) {
+    font-size: 14px;
+    padding: 12px 8px;
+  }
+
+  .btn_logo {
+    margin-right: .5rem;
+  }
+
+  &:hover {
+    // background: linear-gradient(to right,transparent 10%,$black-chinese-bright,transparent) ;
+    background: $white-solitude;
+    color: $black-chinese;
+    font-family: Circular Std;
+  }
+}
+
+// .modal_btn_group_container {
+//   display: flex;
+//   align-items: center;
+//   justify-content: flex-end;
+//   flex-wrap: nowrap;
+
+//   button {
+//     //width: 50%;
+//     margin-right: 1rem;
+
+//     &:last-of-type {
+//       margin-right: 0rem;
+//     }
+
+//   }
+
+//   .separate_line {
+//     width: 1px;
+//     height: 28px;
+//     background: $white-solitude;
+
+//   }
+// }
+
+// .modal_btn_logout {
+//   width: 100%;
+//   button {
+//     width: 100%;
+//   }
+// }

@@ -1,0 +1,14 @@
+.movie_trailer_header {
+  flex-wrap: nowrap;
+  padding: 0px 16px;
+  font-size: 24px;
+  letter-spacing: 0.25px;
+  font-family: Circular Std;
+}
+
+.movie_trailer_content {
+  margin: 24px 0px 48px 16px;
+  @media only screen and (max-width: 962px) {
+    margin: 16px 0px 48px 16px;
+  }
+}

@@ -1,14 +1,22 @@
+import { useRouter } from 'next/router';
 import Navbar from './Navbar';
 import Sidebar from './Sidebar';
 import styles from 'styles/Layout.module.scss';
 
-const Layout = ({children}) => {
+const Layout = ({ children }) => {
+    const { route } = useRouter();
+
     return (
-        <div className={styles.layout_container}>
-            <Navbar/>
-            {/* <Sidebar/> */}
-            {children}
-        </div>
+        <>
+            {(route !== '/login' && route !== '/register')
+                ? 
+                <div className={styles.layout_container}>
+                    <Navbar />
+                    {children}
+                </div> : 
+                <>{children}</>
+            }
+        </>
     );
 }
 

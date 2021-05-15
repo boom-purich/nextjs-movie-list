@@ -1,54 +1,108 @@
-import { useState, useRef } from 'react';
-import Image from 'next/image';
+import { useState, useEffect } from 'react';
+import { useRouter } from 'next/router';
+import Link from 'next/link';
 import styles from 'styles/Navbar.module.scss';
+import Search from './Search';
 
 const Navbar = () => {
+
+    const router = useRouter();
+    const [isShowModal, setIsShowModal] = useState(false);
+    const [searchKeyword, setSearchKeyword] = useState('');
+    const searchingKeyword = () => {
+        router.push({ pathname: '/search', query: { keyword: searchKeyword } });
+        setSearchKeyword("");
+        setIsShowModal(false);
+    }
+
+    useEffect(() => {
+        if (typeof window !== 'undefined') {
+            const handleShowModal = () => {
+                window.innerWidth > 769 && setIsShowModal(false);
+            }
+            window.addEventListener("resize", handleShowModal);
+            handleShowModal();
+            return () => { window.removeEventListener("resize", handleShowModal) }
+        }
+    }, [])
 
     return (
         <div className={styles.navbar_container}>
             <div className={styles.navbar_content}>
                 <div className={styles.navbar_banner_container}>
-                    <Image src="/image/icons/play-button.svg" width={48} height={48} />
-                    <span className={`d-none d-md-block ${styles.banner_word}`}>Movie List</span>
+                    <Link href="/">
+                        <div className={styles.navbar_logo_container}>
+                            <img src="/image/icons/play-button.svg" className={styles.navbar_logo} />
+                        </div>
+                    </Link>
+                    <Search />
                 </div>
-                {/* <div className="search_box_container">
-                    <input className={styles.search_box_field} type="text"/>
-                </div> */}
-                <div className={styles.navbar_btn_group_container}>
-                    <button type="button" className={styles.btn}>
-                        <i className={`fas fa-sign-in-alt ${styles.login_logo}`}></i>
-                        Login
-                    </button>
-                    <button type="button" className={styles.btn}>Join Movie List</button>
-
-                </div>
-
-                {/* <div className={styles.navbar_user_btn_container}>
-
-                </div> */}
-
-                <div className="dropdown d-md-none">
-                        <button className={`${styles.mobile_btn}`} type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i className={`fas fa-angle-down ${styles.bar_icon}`}></i></button>
-                    <div className={`dropdown-menu ${styles.mobile_toggle_container}`} aria-labelledby="dropdownMenuButton">
-                        <div className={styles.toggle_list}><i className={`fas fa-sign-in-alt ${styles.toggle_logo}`}></i> Login</div>
-                        <div className={styles.toggle_list}>Join Movie List</div>
-                        <div className={styles.toggle_list}><i className={`fas fa-sign-out-alt ${styles.toggle_logo}`}></i>Logout</div>
+                <div className={styles.navbar_profile_btn_group_container}>
+                    <div className={styles.navbar_profile_container}>
+                        <Link href="/profile">
+                            <button type="button" className={styles.profile_btn}>
+                                <img src="/image/profile/Nanno-profile.jpeg" className={styles.profile_img_btn} />
+                            </button>
+                        </Link>
                     </div>
+                    <div className={styles.navbar_btn_group_container}>
+                        <Link href='/login'>
+                            <button type="button" className={styles.btn}>
+                                <i className={`fas fa-sign-in-alt ${styles.login_logo}`}></i>
+                                Login
+                            </button>
+                        </Link>
+                        <Link href="/register">
+                            <button type="button" className={styles.btn}>Join Movie List</button>
+                        </Link>
+                    </div>
+                    <button className={`nav-hamburger-btn d-md-none ${styles.mobile_btn}`} type="button" onClick={() => setIsShowModal(!isShowModal)}>
+                        {isShowModal ?
+                            <i className={`fas fa-times ${styles.bar_icon}`}></i> : <i className={`fas fa-bars ${styles.bar_icon}`}></i>
+                        }
+                    </button>
                 </div>
+
             </div>
-
-            {/* <div className={styles.navbar_mobile_container}>
-                    <button className={styles.mobile_btn}><i className={`fas fa-angle-down ${styles.bar_icon}`}></i></button>
-                    <div className={styles.mobile_toggle_container}>
-                                <div className={styles.toggle_list}><i className={`fas fa-sign-in-alt ${styles.toggle_logo}`}></i> Login</div>
-                                <div className={styles.toggle_list}>Join Movie List</div>
-                                <div className={styles.toggle_list}><i className={`fas fa-sign-out-alt ${styles.toggle_logo}`}></i>Logout</div>
+            {
+                isShowModal &&
+                <>
+                    <div className={`${styles.navbar_modal_container}`}>
+                        <div>
+                            <div className={styles.find_movie_word}>Find your movie</div>
+                            <div className={styles.modal_search_container}>
+                                <button type="button" className={styles.search_btn} onClick={searchingKeyword}>
+                                    <i className={`fas fa-search ${styles.search_logo}`}></i>
+                                </button>
+                                <input type="text" className={styles.search_field} placeholder="Search movie" value={searchKeyword} onChange={event => setSearchKeyword(event.target.value)} onKeyPress={event => { event.charCode === 13 && searchingKeyword() }} />
+                                <button type="button" className={styles.clear_btn} onClick={() => setSearchKeyword("")} style={{ visibility: searchKeyword ? 'visible' : 'hidden' }}>
+                                    <i className={`fas fa-times-circle my-auto ${styles.clear_logo}`}></i>
+                                </button>
                             </div>
-
-                </div> */}
+                        </div>
+                        <div className={styles.modal_btn_group}>
+                            <Link href='/login'>
+                                <div className={styles.modal_btn_option}>
+                                    <i className={`fas fa-sign-in-alt ${styles.btn_logo}`}></i>
+                            Login
+                        </div>
+                            </Link>
+                            <Link href="/register">
+                                <div className={styles.modal_btn_option}>
+                                    Join movie list
+                                </div>
+                            </Link>
+                            <div className={styles.modal_btn_option}>
+                                <i className={`fas fa-sign-out-alt ${styles.btn_logo}`}></i>
+                    Logout
+                    </div>
+                        </div>
+                    </div>
+                </>
+            }
 
         </div>
-        
+
     );
 }
 

@@ -1,0 +1,76 @@
+@import "color";
+
+.movie_crew_header {
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+  padding: 0px 16px;
+  font-size: 24px;
+  letter-spacing: 0.25px;
+  font-family: Circular Std;
+}
+
+.movie_crew_content {
+  margin: 24px 0px 48px;
+  @media only screen and (max-width: 962px) {
+    margin: 16px 0px 48px;
+  }
+}
+
+.crew_card_container {
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+  width: 100%;
+  padding: 8px 16px;
+}
+
+.crew_card_content {
+  // background: $black-chinese-bright;
+  min-width: 250px;
+  border-radius: 9px;
+  padding: 20px 16px;
+  border: 1px solid rgba($color: $white-solitude, $alpha: 0.3);
+  margin-right: 16px;
+  transition: transform 0.3s ease 0s, background 0.3s ease 0s;
+
+  &:last-of-type {
+    margin-right: 20px;
+  }
+
+  @media only screen and (max-width: 962px) {
+    min-width: 200px;
+    padding: 14px;
+    margin-right: 12px;
+    &:last-of-type {
+      margin-right: 16px;
+    }
+  }
+
+  &:hover {
+    transform: scale(1.05);
+    background: #af061a;
+    border: none;
+  }
+}
+
+.crew_card_header {
+  color: rgba($color: $white-solitude, $alpha: 0.6);
+  font-size: 14px;
+
+  @media only screen and (max-width: 962px) {
+    font-size: 12px;
+  }
+}
+
+.crew_card_name {
+  margin-top: 8px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-family: Circular Std;
+
+  @media only screen and (max-width: 962px) {
+    font-size: 14px;
+  }
+}
