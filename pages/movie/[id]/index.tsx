@@ -1,5 +1,6 @@
+import { useState } from 'react';
 import { useRouter } from 'next/router';
-import styles from 'styles/Movie.module.scss';
+import styles from 'styles/Movie/Movie.module.scss';
 import Cast from 'components/Movie/Cast';
 import Crew from 'components/Movie/Crew';
 import Trailer from 'components/Movie/Trailer';
@@ -79,7 +80,6 @@ const MovieComponent = () => {
                     </div>
                 </div>
             </div>
-
         </div >
     );
 }

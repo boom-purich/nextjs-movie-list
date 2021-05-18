@@ -2,7 +2,7 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { Formik } from 'formik'
 import { LoginField, LoginSchema } from 'models/authentication.model';
-import styles from 'styles/Login.module.scss';
+import styles from 'styles/Layout/Login.module.scss';
 
 const Login = () => {
 

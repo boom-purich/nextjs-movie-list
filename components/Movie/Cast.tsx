@@ -1,4 +1,4 @@
-import styles from 'styles/Cast.module.scss';
+import styles from 'styles/Movie/Cast.module.scss';
 import ScrollContainer from 'react-indiana-drag-scroll'
 
 const Cast = () => {

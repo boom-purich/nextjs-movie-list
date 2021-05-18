@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Formik } from 'formik';
 import Link from 'next/link';
-import styles from 'styles/Register.module.scss';
+import styles from 'styles/Layout/Register.module.scss';
 import { RegisterField, RegisterSchema } from 'models/authentication.model';
 
 

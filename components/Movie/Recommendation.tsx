@@ -1,4 +1,4 @@
-import styles from 'styles/Recommendation.module.scss';
+import styles from 'styles/Movie/Recommendation.module.scss';
 import ScrollContainer from 'react-indiana-drag-scroll';
 
 const Recommendation = () => {

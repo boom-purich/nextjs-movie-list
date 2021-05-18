@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 import Navbar from './Navbar';
 import Sidebar from './Sidebar';
-import styles from 'styles/Layout.module.scss';
+import styles from 'styles/Layout/Layout.module.scss';
 
 const Layout = ({ children }) => {
     const { route } = useRouter();

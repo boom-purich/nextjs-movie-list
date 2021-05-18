@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
-import styles from 'styles/Navbar.module.scss';
+import styles from 'styles/Layout/Navbar.module.scss';
 import Search from './Search';
 
 const Navbar = () => {
@@ -56,7 +56,7 @@ const Navbar = () => {
                             <button type="button" className={styles.btn}>Join Movie List</button>
                         </Link>
                     </div>
-                    <button className={`nav-hamburger-btn d-md-none ${styles.mobile_btn}`} type="button" onClick={() => setIsShowModal(!isShowModal)}>
+                    <button className={`nav-hamburger-btn ${styles.mobile_btn}`} type="button" onClick={() => setIsShowModal(!isShowModal)}>
                         {isShowModal ?
                             <i className={`fas fa-times ${styles.bar_icon}`}></i> : <i className={`fas fa-bars ${styles.bar_icon}`}></i>
                         }

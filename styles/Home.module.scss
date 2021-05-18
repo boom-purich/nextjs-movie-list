@@ -57,11 +57,12 @@
     }
 
     @media only screen and (max-width:576px) {
-      font-size: 36px;
+      font-size: 48px;
     }
 
     font-size: 5em;
     letter-spacing: 1px;
+    font-family: Circular Std;
     //text-align: center;
   }
 
@@ -80,6 +81,7 @@
     user-select: none;
     background-color: transparent;
     transition: background-color 0.3s ease-in-out 0s,color 0.3s ease-in-out 0s;
+    font-family: Circular Std;
 
     &:hover {
       background-color:$red-alizarin;
@@ -91,7 +93,7 @@
     }
 
     @media only screen and (max-width:576px) {
-      font-size: 12px;
+      // font-size: 12px;
     }
 
     font-size: 1.5rem;

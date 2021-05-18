@@ -1,0 +1,120 @@
+@import 'color';
+
+.profile_container {
+    position: relative;
+    height: 100%;
+    padding: 95px 0px 0px;
+
+    @media only screen and (max-width:576px) {
+        padding: 80px 0px 0px;
+    }
+}
+
+.profile_backdrop_container {
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    width: 100%;
+    height: 450px;
+
+    .profile_backdrop {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: 50% 30%;
+        filter: brightness(0.4);
+
+        
+    }
+
+    &::after {
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 40px;
+        bottom: 0;
+        left: 0;
+        background: linear-gradient(to bottom,transparent,$black-chinese);
+    }
+
+
+}
+
+.profile_content {
+    position: relative;
+    z-index: 2;
+    color: $white-solitude;
+    width: 100%;
+    max-width: 962px;
+    margin: 0 auto;
+}
+
+.profile_image_container {
+    display: block;
+    margin: 0 auto;
+    position: relative;
+    width: 150px;
+    height: 150px;
+    border: 2px solid $white-solitude;
+    border-radius: 50%;
+    padding: 10px;
+    margin-top: 80px;
+
+    @media only screen and (max-width:962px) {
+        width: 120px;
+        height: 120px;
+        padding: 8px;
+    }
+
+    img {
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+    }
+}
+
+.profile_name_container {
+    margin: 24px 0px;
+    text-align: center;
+    font-size: 36px;
+    letter-spacing: .25px;
+    font-family: Circular Std;
+
+    @media only screen and (max-width:962px) {
+        font-size: 28px; 
+    }
+    
+}
+
+.profile_name_setting_container {
+
+    button {
+        display: flex;
+        align-items: center;
+        margin: 0 auto;
+        border: none;
+        border-radius: 50px;
+        font-size: 14px;
+        white-space: nowrap;
+        padding: 10px 16px;
+        letter-spacing: .25px;
+        color: $white-solitude;
+        background: $red;
+        transition: transform 0.3s ease 0s;
+
+        &:hover,&:active {
+            transform: scale(1.05);
+        }
+    }
+
+    .edit_icon {
+        margin-right: 8px;
+    }
+
+}
+
+.profile_movie_list_container {
+    margin: 0px 16px;
+    padding: 90px 0px 0px;
+}

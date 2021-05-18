@@ -1,4 +1,4 @@
-import styles from 'styles/Trailer.module.scss';
+import styles from 'styles/Movie/Trailer.module.scss';
 import YoutubeComponent from 'components/Youtube';
 
 const Trailer = () => {

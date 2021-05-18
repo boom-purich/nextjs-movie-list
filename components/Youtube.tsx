@@ -1,4 +1,4 @@
-import styles from 'styles/Youtube.module.scss';
+import styles from 'styles/Common/Youtube.module.scss';
 
 const YoutubeComponent = ({ embedId }) => {
     return (

@@ -1,7 +1,7 @@
 import { GetStaticProps, GetStaticPaths } from 'next';
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router'
-import styles from 'styles/SearchMovie.module.scss';
+import styles from 'styles/Layout/SearchMovie.module.scss';
 import ImagePalette from 'react-image-palette'
 import MovieModal from 'components/MovieModal';
 import { Movie,MovieModalData } from 'models/movie.model';
@@ -74,7 +74,7 @@ const SearchKeyword = ({ movies }) => {
                     </div>
                 </div>
             </div>
-            <MovieModal isShowModal={isShowModal} setIsShowModal={setIsShowModal}/>
+            <MovieModal isOpenModal={isShowModal} setIsOpenModal={setIsShowModal} />
         </>
     );
 }
