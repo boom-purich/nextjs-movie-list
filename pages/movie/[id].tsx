@@ -110,11 +110,11 @@ const MovieComponent = ({movie,cast,crew,trailer,watches,recommends}) => {
 
 export const getServerSideProps: GetServerSideProps = async ({params:{id}}) => {
     
-    const {data:{resultData}} = await axios.get(`${process.env.API_URL}/api/movies/${id}`);
-    const castCrewData = await axios.get(`${process.env.API_URL}/api/movies/credits?movie_id=${id}`);
-    const trailerList = await axios.get(`${process.env.API_URL}/api/movies/trailer/${id}`);
-    const recommendList = await axios.get(`${process.env.API_URL}/api/movies/recommendations/${id}`);
-    const watchProviderList = await axios.get(`${process.env.API_URL}/api/movies/watch/${id}`);
+    const {data:{resultData}} = await axios.get(`/api/movies/${id}`);
+    const castCrewData = await axios.get(`/api/movies/credits?movie_id=${id}`);
+    const trailerList = await axios.get(`/api/movies/trailer/${id}`);
+    const recommendList = await axios.get(`/api/movies/recommendations/${id}`);
+    const watchProviderList = await axios.get(`/api/movies/watch/${id}`);
     const movie:Movie = resultData;
     const { cast,crew } = castCrewData?.data.resultData;
     const trailer = trailerList?.data?.resultData[0] || {};
