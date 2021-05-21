@@ -17,26 +17,36 @@
   }
 }
 
-.crew_card_container {
+.crew_card_group {
   display: flex;
-  align-items: center;
+  // align-items: center;
   flex-wrap: nowrap;
   width: 100%;
   padding: 8px 16px;
 }
 
+.crew_card_container {
+  padding-right: 20px;
+  // height: 100%;
+}
+
 .crew_card_content {
   // background: $black-chinese-bright;
+  user-select: none;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   min-width: 250px;
   border-radius: 9px;
   padding: 20px 16px;
   border: 1px solid rgba($color: $white-solitude, $alpha: 0.3);
-  margin-right: 16px;
+  // margin-right: 16px;
   transition: transform 0.3s ease 0s, background 0.3s ease 0s;
 
-  &:last-of-type {
-    margin-right: 20px;
-  }
+  // &:last-of-type {
+  //   margin-right: 20px;
+  // }
 
   @media only screen and (max-width: 962px) {
     min-width: 200px;

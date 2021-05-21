@@ -8,8 +8,6 @@ import { isMobile } from "react-device-detect";
 // const scrollToRef = (ref) => setTimeout(() => {window.scrollTo({top:ref.current.offsetTop,behavior:'smooth'})},300);
 
 const Home = () => {
-  const trendTopicWeek = { topic: 'Trend of this week' };
-  const trendTopicThMovie = { topic: 'Thai movie discover' };
   const trendRef = useRef(null);
   const clickScrollDown = () => {
     let scroll = Scroll.animateScroll;

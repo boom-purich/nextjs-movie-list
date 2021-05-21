@@ -1,10 +1,13 @@
-import React from 'react';
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Slide from '@material-ui/core/Slide';
 import movieModalStyles from 'styles/Movie/MovieModal.module.scss';
+import { convertDateToYear } from 'utils/convertTime';
 
-const NewMovieModal = ({ isOpenModal, setIsOpenModal }) => {
+const NewMovieModal = ({ isOpenModal, setIsOpenModal, movie }) => {
+
+    const IMG_URL = 'https://image.tmdb.org/t/p/original';
+
     return (
         <Modal
             open={isOpenModal}
@@ -16,20 +19,27 @@ const NewMovieModal = ({ isOpenModal, setIsOpenModal }) => {
                 timeout: 500,
             }}
         >
-            <Slide direction="down" in={isOpenModal} timeout={{enter:300,exit:300}} mountOnEnter unmountOnExit>
+            <Slide direction="down" in={isOpenModal} timeout={{ enter: 300, exit: 300 }} mountOnEnter unmountOnExit>
                 <div className={movieModalStyles.movie_modal_content}>
                     <div className={movieModalStyles.movie_backdrop_container}>
-                        <img src="/image/backdrop/bad-genius-backdrop.jpg" className={movieModalStyles.movie_backdrop} />
+                        {
+                            movie?.backdrop_path ? <img src={IMG_URL + movie?.backdrop_path} className={movieModalStyles.movie_backdrop} />
+                                :
+                                <div className={movieModalStyles.no_backdrop_container}>
+                                    <i className={`fas fa-image ${movieModalStyles.image_icon}`}></i>
+                                    <div className={movieModalStyles.no_movie_word}>No Movie Backdrop</div>
+                                </div>
+                        }
                     </div>
                     <div className={movieModalStyles.movie_modal_detail_container}>
                         <div className={movieModalStyles.header_btn_container}>
                             <div className={`${movieModalStyles.detail_header_container}`}>
-                                <div className={movieModalStyles.detail_header_word}>three billboards outside ebbing missouri</div>
-                                <div className={movieModalStyles.year_name}>ฉลาดเกมส์โกง - (2017)</div>
+                                <div className={movieModalStyles.detail_header_word}>{movie?.title}</div>
+                                <div className={movieModalStyles.year_name}>{movie?.original_title} - ({convertDateToYear(movie?.release_date)})</div>
                             </div>
                         </div>
                         <div className={movieModalStyles.movie_modal_overview}>
-                            Lynn, a brilliant student, after helping her friends to get the grades they need, develops the idea of starting a much bigger exam-cheating business.
+                            {movie?.overview}
                         </div>
                         <div className={movieModalStyles.see_full_detail_container}>
                             <div className={`${movieModalStyles.btn_group_container}`}>
@@ -41,7 +51,7 @@ const NewMovieModal = ({ isOpenModal, setIsOpenModal }) => {
                                 </button>
                             </div>
 
-                            <button type="button" className={movieModalStyles.see_full_detail_btn}>
+                            <button type="button" className={movieModalStyles.see_full_detail_btn} onClick={() => { window.location.href = `/movie/${movie?.id}` }}>
                                 More info
                                 <i className={`fas fa-angle-right ${movieModalStyles.btn_right_logo}`}></i>
                             </button>

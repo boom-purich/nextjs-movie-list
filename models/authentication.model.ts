@@ -1,5 +1,14 @@
 import * as yup from 'yup';
 
+export class User {
+    id?:any = '';
+    firstname?:any = '';
+    lastname?:any = '';
+    email?:any = '';
+    imgUrl?:any = '';
+    token?:any = '';
+}
+
 export class RegisterField {
     email:string = '';
     password:string = '';

@@ -67,6 +67,29 @@
     }
 }
 
+.no_backdrop_container {
+    width: 100%;
+    height: 350px;
+    background: rgba($color: $black-chinese-bright, $alpha: .8);
+    border-radius: 9px 9px 0px 0px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    letter-spacing: .25px;
+    color: rgba($color: $white-solitude, $alpha: .5);
+
+    .image_icon {
+        font-size: 72px;
+    }
+
+    .no_movie_word {
+        margin-top: 8px;
+        font-family: Circular Std;
+        font-size: 28px;
+    }
+}
+
 .movie_modal_detail_container {
     position: relative;
     z-index: 1;
@@ -184,7 +207,7 @@
 }
 
 .movie_modal_overview {
-    margin: 24px 0px;
+    margin: 24px 0px 40px;
     font-size: 14px;
     width: 85%;
 
@@ -232,6 +255,7 @@
     line-height: normal;
     font-family: Circular Std;
     letter-spacing: .05px;
+    cursor: pointer;
 
     @media only screen and (max-width:576px) {
         font-size: 14px;

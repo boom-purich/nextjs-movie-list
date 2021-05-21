@@ -20,15 +20,14 @@
 
 .movie_recommendation_card_container {
   // position: relative;
-  min-width: 300px;
-  width: 100%;
+  // min-width: 300px;
   height: 180px;
-  margin-right: 1.5rem;
+  padding-right: 1.5rem;
 
   @media only screen and (max-width: 962px) {
-    min-width: 200px;
+    // min-width: 200px;
     height: 120px;
-    margin-right: 1.25rem;
+    padding-right: 1.25rem;
   }
 
   .separate_line {
@@ -40,16 +39,21 @@
 }
 
 .recommendation_backdrop {
-  width: 100%;
+  width: 300px;
+  @media only screen and (max-width: 962px) {
+    width: 200px;
+  }
+
   height: 100%;
   object-fit: cover;
   object-position: center center;
   border-radius: 9px;
   transition: transform 0.3s ease 0s, margin-bottom 0.3s ease 0s;
+  cursor: pointer;
 
   &:hover {
     transform: scale(1.05);
-    margin-bottom: 10px;
+    margin-bottom: 4px;
 
     @media only screen and (max-width: 962px) {
       margin-bottom: 4px;
@@ -57,8 +61,36 @@
   }
 }
 
+.no_backdrop_recommendation {
+  width: 300px;
+  @media only screen and (max-width: 962px) {
+    width: 200px;
+  }
+  background: $black-chinese-bright;
+
+  height: 100%;
+  border-radius: 9px;
+  transition: transform 0.3s ease 0s, margin-bottom 0.3s ease 0s;
+  cursor: pointer;
+  display: flex;
+
+  &:hover {
+    transform: scale(1.05);
+    margin-bottom: 4px;
+
+    @media only screen and (max-width: 962px) {
+      margin-bottom: 4px;
+    }
+  }
+
+  .image_logo {
+    margin: auto;
+    font-size: 60px;
+  }
+}
+
 .recommendation_movie_name {
-  white-space: nowrap;
+  // white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
   padding: 0px 4px;

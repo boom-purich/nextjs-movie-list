@@ -215,8 +215,12 @@
     }
 }
 
+.validate_open {
+    margin-top: 8px !important;
+}
+
 .sign_in_btn,.loading_btn {
-    margin-top: 28px;
+    margin-top: 25px;
     border: none;
     height: 50px;
     width: 100%;
@@ -274,7 +278,7 @@
 }
 
 .sign_in_method_content {
-    margin: 0px 0px 2.5rem;
+    margin: 2.5rem 0px 2.5rem;
 }
 
 .method_header {
@@ -365,6 +369,33 @@
         @media only screen and (max-width:576px) {
             max-height: 24px;
         }
+    }
+}
+
+.loading_progress {
+    width: 25px !important;
+    height: 25px !important;
+    color: $red !important;
+    margin-right: .75rem;
+}
+
+.snackbar_container {
+    
+    .snackbar_content {
+        color: #fff;
+        font-size: 16px;
+        padding: 16px 28px;
+        border-radius: 50px;
+        white-space: nowrap;
+        letter-spacing: .25px;
+    }
+
+    .update_success {
+        background-color: $line-app;
+    }
+
+    .update_fail {
+        background-color: $red;
     }
 }
 

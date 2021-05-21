@@ -38,3 +38,26 @@ export class MovieList {
         this.headerName = header;
     }
 }
+
+export class PopularSelected {
+    imgUrl?:string;
+    movie_name?:string;
+    movie_id?:number;
+}
+
+export class Cast {
+    credit_id:string;
+    cast_id:number;
+    name:string;
+    original_name:string;
+    character:string;
+}
+
+export class Crew {
+    id:number;
+    name:string;
+    original_name:string;
+    credit_id:string;
+    department:string;
+    job:string;
+}

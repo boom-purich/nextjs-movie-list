@@ -1,11 +1,15 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
+import { useSelector, useDispatch } from 'react-redux';
 import Link from 'next/link';
 import styles from 'styles/Layout/Navbar.module.scss';
 import Search from './Search';
+import type { RootState } from 'redux/store';
 
 const Navbar = () => {
 
+    const dispatch = useDispatch();
+    const { user } = useSelector((state:RootState) => state);
     const router = useRouter();
     const [isShowModal, setIsShowModal] = useState(false);
     const [searchKeyword, setSearchKeyword] = useState('');
@@ -38,13 +42,17 @@ const Navbar = () => {
                     <Search />
                 </div>
                 <div className={styles.navbar_profile_btn_group_container}>
-                    <div className={styles.navbar_profile_container}>
-                        <Link href="/profile">
-                            <button type="button" className={styles.profile_btn}>
-                                <img src="/image/profile/Nanno-profile.jpeg" className={styles.profile_img_btn} />
-                            </button>
-                        </Link>
-                    </div>
+                    {
+                        Object.keys(user).length !== 0 &&
+                        <div className={styles.navbar_profile_container}>
+                            <Link href="/profile">
+                                <button type="button" className={styles.profile_btn}>
+                                    <img src="/image/profile/Nanno-profile.jpeg" className={styles.profile_img_btn} />
+                                </button>
+                            </Link>
+                        </div>
+                    }
+
                     <div className={styles.navbar_btn_group_container}>
                         <Link href='/login'>
                             <button type="button" className={styles.btn}>
@@ -71,13 +79,21 @@ const Navbar = () => {
                         <div>
                             <div className={styles.find_movie_word}>Find your movie</div>
                             <div className={styles.modal_search_container}>
+                                <input type="text" className={styles.search_field} placeholder="Search movie" value={searchKeyword} onChange={event => setSearchKeyword(event.target.value)} onKeyPress={event => { event.charCode === 13 && searchingKeyword() }} />
+                                <button type="button" className={styles.clear_btn} onClick={() => setSearchKeyword("")} style={{ visibility: searchKeyword ? 'visible' : 'hidden' }}>
+                                    <i className={`fas fa-times-circle my-auto ${styles.clear_logo}`}></i>
+                                </button>
                                 <button type="button" className={styles.search_btn} onClick={searchingKeyword}>
+                                    <i className={`fas fa-search ${styles.search_logo}`}></i>
+                                </button>
+                                {/* <button type="button" className={styles.search_btn} onClick={searchingKeyword}>
                                     <i className={`fas fa-search ${styles.search_logo}`}></i>
                                 </button>
                                 <input type="text" className={styles.search_field} placeholder="Search movie" value={searchKeyword} onChange={event => setSearchKeyword(event.target.value)} onKeyPress={event => { event.charCode === 13 && searchingKeyword() }} />
                                 <button type="button" className={styles.clear_btn} onClick={() => setSearchKeyword("")} style={{ visibility: searchKeyword ? 'visible' : 'hidden' }}>
                                     <i className={`fas fa-times-circle my-auto ${styles.clear_logo}`}></i>
-                                </button>
+                                </button> */}
+
                             </div>
                         </div>
                         <div className={styles.modal_btn_group}>

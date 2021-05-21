@@ -97,4 +97,30 @@
     &:active,&:focus {
         outline: none;
     }
+
+}
+
+.popover_container {
+    .MuiPaper-root {
+        background-color: transparent !important;
+    }
+    
+}
+
+.popover_content {
+    margin: 12px 8px;
+    background: $red;
+    color: $white-solitude;
+    padding: 10px 16px;
+    font-size: 14px;
+    border-radius: 9px;
+    font-family: Circular Std;
+    letter-spacing: .25px;
+    display: flex;
+    align-items: center;
+
+    i {
+        margin-left: 2rem;
+        cursor: pointer;
+    }
 }

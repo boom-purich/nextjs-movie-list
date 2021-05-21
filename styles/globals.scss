@@ -111,4 +111,9 @@ button {
   outline: 1px solid $white-solitude;
 }
 
+.search_popover_container {
+  .MuiPaper-root {
+    background-color: transparent !important;
+  }
+}
 
