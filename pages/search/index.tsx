@@ -113,7 +113,8 @@ const SearchKeyword = ({ movies }) => {
 }
 
 export const getServerSideProps: GetServerSideProps = async ({ query: { keyword } }) => {
-    const searchMovieUrl: string = `/api/search?keyword=${keyword}`;
+    const baseUrl = process.env.NODE_ENV === 'development' ? process.env.API_DEVELOPMENT_URL : process.env.API_PRODUCTION_URL;
+    const searchMovieUrl: string = `${baseUrl}/api/search?keyword=${keyword}`;
     const { data: { resultData } } = await axios.get(encodeURI(searchMovieUrl));
     const movies = resultData;
     return {
