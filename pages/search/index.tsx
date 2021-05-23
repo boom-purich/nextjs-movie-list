@@ -107,7 +107,8 @@ const SearchKeyword = ({ movies }) => {
                     </div>
                 </div>
             </div>
-            <MovieModal isOpenModal={isShowModal} setIsOpenModal={setIsShowModal} movie={selectMovieData} />
+            {/* <MovieModal isOpenModal={isShowModal} setIsOpenModal={setIsShowModal} movie={selectMovieData} /> */}
+            <MovieModal {...{isOpenModal:isShowModal,setIsOpenModal:setIsShowModal,movie:selectMovieData}}/>
         </>
     );
 }
