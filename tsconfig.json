@@ -7,7 +7,6 @@
       "models/*": ["models/*"],
       "redux/*": ["redux/*"],
       "utils/*": ["utils/*"],
-      "firestore/*": ["firebase/firestore/*"],
     },
     "target": "es5",
     "lib": [
