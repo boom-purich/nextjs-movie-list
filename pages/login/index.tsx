@@ -9,13 +9,13 @@ import { TransitionProps } from '@material-ui/core/transitions';
 import styles from 'styles/Layout/Login.module.scss';
 import { Snackbar } from '@material-ui/core';
 import firebase from '../../firebase/initFirebase';
-import { User } from 'firestore/write';
+// import { User } from 'firestore/write';
 
 firebase();
 
 const Login = () => {
 
-    const userService = new User();
+    // const userService = new User();
     const [isShowPassword, setIsShowPassword] = useState<boolean>(false);
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [isSuccessAuthorize, setIsSuccessAuthorize] = useState<any>({open:false,Transition:Fade,success:false});

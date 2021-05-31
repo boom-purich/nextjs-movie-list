@@ -9,7 +9,7 @@ import Slide from '@material-ui/core/Slide';
 import { Snackbar } from '@material-ui/core';
 import { TransitionProps } from '@material-ui/core/transitions';
 import firebase from '../../firebase/initFirebase';
-import { User } from 'firestore/write';
+// import { User } from 'firestore/write';
 
 firebase();
 
@@ -17,7 +17,7 @@ const Register = () => {
 
   // const [registerField,setRegisterField] = useState<RegisterField>(new RegisterField());
   // const [errorField, setErrorField] = useState<RegisterErrorField>(new RegisterErrorField());
-  const userService = new User();
+  // const userService = new User();
   const [isShowPassword, setIsShowPassword] = useState<boolean>(false);
   const [isShowConfirmPassword, setIsShowConfirmPassword] = useState<boolean>(false);
   const [isRegistering, setIsResgistering] = useState<any>({ open: false, success: false, Transition: Fade });
@@ -30,30 +30,30 @@ const Register = () => {
   const handleSubmit = async (value: any, action: any) => {
     
     console.log('Value : ', value);
-    try {
-      setIsLoading(loading => loading = true);
-      userService.email = value?.email;
-      userService.password = value?.password;
-      const { success,message } = await userService.createUserWithEmailPasswordMethod(); 
-      if (success) {
-        setIsResgistering({ ...isRegistering, open: true, success: success, Transition: SlideTransition });
-        action.resetForm({});
-        setIsLoading(loading => loading = false);
-        // setTimeout(() => {
-        //   window.location.href = "/";
-        // }, 500);
-      }else{
-        setRegisterMessage(message);
-        setIsResgistering({ ...isRegistering, open: true, success: success, Transition: SlideTransition });
+    // try {
+    //   setIsLoading(loading => loading = true);
+    //   userService.email = value?.email;
+    //   userService.password = value?.password;
+    //   const { success,message } = await userService.createUserWithEmailPasswordMethod(); 
+    //   if (success) {
+    //     setIsResgistering({ ...isRegistering, open: true, success: success, Transition: SlideTransition });
+    //     action.resetForm({});
+    //     setIsLoading(loading => loading = false);
+    //     // setTimeout(() => {
+    //     //   window.location.href = "/";
+    //     // }, 500);
+    //   }else{
+    //     setRegisterMessage(message);
+    //     setIsResgistering({ ...isRegistering, open: true, success: success, Transition: SlideTransition });
         
-      }
-      setIsLoading(loading => loading = false);
+    //   }
+    //   setIsLoading(loading => loading = false);
 
 
-    } catch (error) {
-      setIsResgistering({ ...isRegistering, open: true, success: false, Transition: SlideTransition });
-      setIsLoading(loading => loading = false);
-    }
+    // } catch (error) {
+    //   setIsResgistering({ ...isRegistering, open: true, success: false, Transition: SlideTransition });
+    //   setIsLoading(loading => loading = false);
+    // }
 
 
   }
