@@ -341,18 +341,18 @@
             height: 45px;
             
             &:nth-child(even) {
-                margin: 0px 12px !important;
+                margin: 0px 14px !important;
             }
         }
 
         &:nth-child(even) {
-            margin: 0px 16px;
+            margin: 0px 0px 0px 20px;
             background: $facebook;
         }
 
-        &:last-of-type {
-            background: $line-app;
-        }
+        // &:last-of-type {
+        //     background: $line-app;
+        // }
 
         &:hover,&:active {
             transform: scale(1.05);

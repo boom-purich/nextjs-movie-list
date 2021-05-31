@@ -51,10 +51,11 @@
   @media only screen and (max-width: 962px) {
     min-width: 200px;
     padding: 14px;
-    margin-right: 12px;
-    &:last-of-type {
-      margin-right: 16px;
-    }
+    margin-right: 0px;
+    // margin-right: 12px;
+    // &:last-of-type {
+    //   margin-right: 16px;
+    // }
   }
 
   &:hover {

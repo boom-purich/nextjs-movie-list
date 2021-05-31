@@ -1,225 +1,233 @@
-@import '../color';
+@import "../color";
 
 .new_trend_content {
-    padding: 36px 50px 0px 60px;
+  padding: 36px 50px 0px 60px;
 
-    @media only screen and (max-width:768px) {
-        padding: 36px 24px 0px;
-    }
+  @media only screen and (max-width: 768px) {
+    padding: 36px 24px 0px;
+  }
 }
 
 .new_trend_header {
-    color: $white-solitude;
-    font-size: 36px;
-    font-family: Circular Std;
-    letter-spacing: .25px;
-    display: flex;
-    align-items: center;
+  color: $white-solitude;
+  font-size: 36px;
+  font-family: Circular Std;
+  letter-spacing: 0.25px;
+  display: flex;
+  align-items: center;
+
+  .separate_line {
+    margin-right: 20px;
+    width: 8px;
+    height: 40px;
+    background: $red;
+  }
+
+  @media only screen and (max-width: 768px) {
+    font-size: 28px;
 
     .separate_line {
-        margin-right: 20px;
-        width: 8px;
-        height: 40px;
-        background: $red;
+      margin-right: 14px;
+      width: 4px;
     }
-
-    @media only screen and (max-width:768px) {
-        font-size: 28px;
-
-        .separate_line {
-            margin-right: 14px;
-            width: 4px;
-        }
-    }
+  }
 }
 
 .new_trend_selected_list_container {
-    // display: flex;
-    // align-items: center;
-    // flex-wrap: wrap;
-    width: 100%;
-    margin: 36px 0px;
-    border-radius: 9px;
-    height: 100%;
-    position: relative;
+  // display: flex;
+  // align-items: center;
+  // flex-wrap: wrap;
+  width: 100%;
+  margin: 36px 0px;
+  border-radius: 9px;
+  height: 100%;
+  position: relative;
 
-    @media only screen and (max-width:768px) {
-        margin: 36px 0px 8px;
+  @media only screen and (max-width: 768px) {
+    margin: 36px 0px 8px;
+  }
+
+  &:hover {
+    .new_trend_selected_backdrop_container img {
+      transform: scale(1.005);
+      filter: brightness(0.65);
     }
 
-    &:hover {
-        .new_trend_selected_backdrop_container img {
-            transform: scale(1.005);
-            filter: brightness(.65);
-        }
-
-        .new_trend_top_movie_container,.more_info_btn {
-            opacity: 1;
-        }        
-        
+    .new_trend_top_movie_container,
+    .more_info_btn {
+      opacity: 1;
     }
-
-    
+  }
 }
 
 .new_trend_selected_backdrop_container {
-    position: relative;
+  position: relative;
+  width: 100%;
+  height: 450px;
+
+  @media only screen and (max-width: 768px) {
+    height: 300px;
+  }
+
+  img {
+    // padding: 16px;
+    transition: all 0.3s ease 0s;
     width: 100%;
-    height: 450px;
-
-    @media only screen and (max-width:768px) {
-        height: 300px;
-    }
-
-    img {
-        // padding: 16px;
-        transition: all 0.3s ease 0s;
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        object-position: 50% 30%;
-        border-radius: 9px;
-        // border: 2px solid rgba($color: $white-solitude, $alpha: .3);
-    }
+    height: 100%;
+    object-fit: cover;
+    object-position: 50% 30%;
+    border-radius: 9px;
+    // border: 2px solid rgba($color: $white-solitude, $alpha: .3);
+  }
 }
 
 .new_trend_top_movie_container {
-    position: absolute;
-    top: 0;
-    left: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  color: $white-solitude;
+  padding: 20px 24px;
+  opacity: 0;
+  transition: all 0.3s ease 0s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  .top_movie_header {
     width: 100%;
-    height: 100%;
-    color: $white-solitude;
-    padding: 20px 24px;
-    opacity: 0;
-    transition: all 0.3s ease 0s;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-
-    .top_movie_header {
-        width: 100%;
-        font-family: Circular Std;
-        text-align: center;
-        font-size: 54px;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        line-height: 1.25;
-        letter-spacing: .5px;
-        @media only screen and (max-width:768px) {
-            font-size: 36px;
-        }
+    font-family: Circular Std;
+    text-align: center;
+    font-size: 54px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 1.25;
+    letter-spacing: 0.5px;
+    @media only screen and (max-width: 768px) {
+      font-size: 36px;
     }
+  }
 
-    .separate_line {
-        margin: 16px 0px;
-        width: 100px;
-        height: 4px;
-        background: $red;
-    }
+  .separate_line {
+    margin: 16px 0px;
+    width: 100px;
+    height: 4px;
+    background: $red;
+  }
 }
 
 .more_info_btn {
-    cursor: pointer;
-    border: none;
-    border-radius: 50px;
-    padding: 10px 24px;
-    background: $red;
-    color: $white-solitude;
-    margin-top: 8px;
-    font-family: Circular Std;
-    transition: all 0.3s ease 0s;
-    letter-spacing: .25px;
-    opacity: 0;
+  cursor: pointer;
+  border: none;
+  border-radius: 50px;
+  padding: 10px 24px;
+  background: $red;
+  color: $white-solitude;
+  margin-top: 8px;
+  font-family: Circular Std;
+  transition: all 0.3s ease 0s;
+  letter-spacing: 0.25px;
+  opacity: 0;
 
-    @media only screen and (max-width:768px) {
-        font-size: 14px;
-    }
+  @media only screen and (max-width: 768px) {
+    font-size: 14px;
+  }
 
-    &:hover {
-        transform: scale(1.05);
-    }
+  &:hover {
+    transform: scale(1.05);
+  }
 }
 
 .new_trend_movie_card_container {
-    color: $white-solitude;
-    display: flex;
-    // align-items: center;
-    flex-wrap: nowrap;
-    padding: 16px 8px;
+  color: $white-solitude;
+  display: flex;
+  // align-items: center;
+  flex-wrap: nowrap;
+  padding: 16px 8px;
 }
 
 .movie_card_container {
-    padding-right: 2rem;
-    cursor: pointer;
+  padding-right: 2rem;
+  cursor: pointer;
 }
 
 .movie_card_content {
-    min-width: 250px;
-    // width: 100%;
+  min-width: 250px;
+  // width: 100%;
 
-    @media only screen and (max-width:768px) {
-        min-width: 200px;
-    }
+  @media only screen and (max-width: 768px) {
+    min-width: 200px;
+  }
 
-    img {
-        width: 100%;
-        height: 150px;
-        @media only screen and (max-width:768px) {
-            height: 125px;
-        }
-        object-fit: cover;
-        border-radius: 9px;
-        transition: all 0.3s ease 0s;
-        // border: 1px solid rgba($color: $white-solitude, $alpha: .6);
-    }
-
-    .card_movie_name {
-        margin-top: 10px;
-        padding: 0px 8px;
-        letter-spacing: .25px;
-        font-family: Circular Std;
-    }
+  .card_movie_name {
+    margin-top: 10px;
+    padding: 0px 8px;
+    letter-spacing: 0.25px;
+    font-family: Circular Std;
+  }
 }
 
 .movie_card_selected {
-    img {
-        padding: 8px;
-        border: 1px solid rgba($color: $white-solitude, $alpha: .6);
-        transform: scale(1.065);
-    }
+  img {
+    padding: 8px;
+    border: 1px solid rgba($color: $white-solitude, $alpha: 0.6);
+    transform: scale(1.065);
+  }
 }
 
 .skeleton_img_content {
-    min-width: 250px;
-    height: 150px !important;
-    max-width: none;
-    @media only screen and (max-width:576px) {
-        min-width: 200px;
-        height: 120px !important;
-    }
-    transform: scale(1) !important;
-    background-color: #3e3e3e !important;
-    margin-right: 1.5rem;
+  min-width: 250px;
+  height: 150px !important;
+  max-width: none;
+  @media only screen and (max-width: 576px) {
+    min-width: 200px;
+    height: 120px !important;
+  }
+  transform: scale(1) !important;
+  background-color: #3e3e3e !important;
+  margin-right: 1.5rem;
 }
 
 .skeleton_name_content {
-    margin-top: 10px !important;
-    transform: scale(1) !important;
-    background-color: #3e3e3e !important;
+  margin-top: 10px !important;
+  transform: scale(1) !important;
+  background-color: #3e3e3e !important;
 }
 
 .skeleton_selected_movie {
-    margin: 36px 0px !important;
-    width: 100% !important;
-    height: 450px !important;
-    transform: scale(1) !important;
-    @media only screen and (max-width:768px) {
-        height: 300px;
-        margin: 36px 0px 8px !important;
-    }
+  margin: 36px 0px !important;
+  width: 100% !important;
+  height: 450px !important;
+  transform: scale(1) !important;
+  @media only screen and (max-width: 768px) {
+    height: 300px;
+    margin: 36px 0px 8px !important;
+  }
 
-    background-color: #3e3e3e !important;
+  background-color: #3e3e3e !important;
+}
+
+.movie_card_backdrop_container {
+  background-color: $black-chinese-bright;
+  border-radius: 9px;
+  height: 150px;
+  @media only screen and (max-width: 768px) {
+    height: 125px;
+  }
+
+  .movie_card_backdrop {
+    width: 100%;
+    height: 100%;
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 9px;
+      transition: all 0.3s ease 0s;
+      // border: 1px solid rgba($color: $white-solitude, $alpha: .6);
+    }
+  }
 }

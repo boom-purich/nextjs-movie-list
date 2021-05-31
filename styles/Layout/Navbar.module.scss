@@ -338,7 +338,7 @@
   margin: 32px 0px 24px;
 
   @media only screen and (max-width:576px) {
-    height: 45px;
+    height: 42px;
     margin: 32px 0px 20px;
   }
   // border-bottom: 1px solid $white-solitude;
@@ -362,6 +362,7 @@
     color: $black-chinese;
     border-radius: 50%;
     margin: 0px 20px 0px 16px;
+    position: relative;
 
     @media only screen and (max-width:576px) {
       width: 28px;
@@ -468,6 +469,39 @@
     background: $white-solitude;
     color: $black-chinese;
     font-family: Circular Std;
+  }
+}
+
+.search_logo {
+  font-size: 12px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+}
+
+.popover_container {
+  .MuiPaper-root {
+      background-color: transparent !important;
+  }
+  
+}
+
+.popover_content {
+  margin: 12px 8px;
+  background: $red;
+  color: $white-solitude;
+  padding: 8px 16px;
+  font-size: 12px;
+  border-radius: 9px;
+  font-family: Circular Std;
+  letter-spacing: .25px;
+  display: flex;
+  align-items: center;
+
+  i {
+      margin-left: 2rem;
+      cursor: pointer;
   }
 }
 

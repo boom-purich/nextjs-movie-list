@@ -1,31 +1,32 @@
-import { useState,useEffect,useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import styles from 'styles/Movie/Discover.module.scss';
 import ScrollContainer from 'react-indiana-drag-scroll';
 import Skeleton from '@material-ui/lab/Skeleton';
-import { Genre,Movie } from 'models/movie.model';
+import { Genre, Movie } from 'models/movie.model';
 import { convertDateToYear } from 'utils/convertTime'
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 import axios from 'axios';
 
 const Discover = () => {
 
     const IMG_URL = 'https://image.tmdb.org/t/p/original';
     const useGenreList = () => {
-        const [genreList,setGenreList] = useState<Array<Genre>>([]);
+        const [genreList, setGenreList] = useState<Array<Genre>>([]);
         const [genreLoading, setGenreLoading] = useState<boolean>(true);
         const getGenreList = async () => {
-            try{
-                const genreUrl:string = `/api/movies/genre` ;
-                const { data: {resultData} } = await axios.get(genreUrl);
+            try {
+                const genreUrl: string = `/api/movies/genre`;
+                const { data: { resultData } } = await axios.get(genreUrl);
                 resultData && setGenreList(resultData);
                 setGenreLoading(false);
-            }catch(error) {
+            } catch (error) {
                 setGenreList([]);
-                setGenreLoading(false);   
+                setGenreLoading(false);
             }
         }
         useEffect(() => {
             getGenreList();
-        },[])
+        }, [])
 
         return {
             genreList,
@@ -35,19 +36,19 @@ const Discover = () => {
         }
     }
 
-    const { genreList,setGenreList,genreLoading,setGenreLoading } = useGenreList();
+    const { genreList, setGenreList, genreLoading, setGenreLoading } = useGenreList();
     const [selectedGenre, setSelectedGenre] = useState<number>(28);
-    const useResultList = (genre_id:number) => {
+    const useResultList = (genre_id: number) => {
         const [resultList, setResultList] = useState<Array<Movie>>([]);
         const [resultLoading, setResultLoading] = useState<boolean>(true);
-        const getResultList = async(genre_id:number) => {
+        const getResultList = async (genre_id: number) => {
             setResultLoading(true);
-            try{
-                const { data:{resultData} } = await axios.get(`/api/movies/discover?genre_id=${genre_id}`);
+            try {
+                const { data: { resultData } } = await axios.get(`/api/movies/discover?genre_id=${genre_id}`);
                 resultData && setResultList(resultData);
                 resultRef.current.scrollLeft = 0;
                 setResultLoading(false);
-            }catch(error){
+            } catch (error) {
                 resultRef.current.scrollLeft = 0;
                 setResultList([]);
                 setResultLoading(false);
@@ -56,7 +57,7 @@ const Discover = () => {
 
         useEffect(() => {
             getResultList(genre_id);
-        },[genre_id])
+        }, [genre_id])
 
         return {
             resultList,
@@ -68,8 +69,8 @@ const Discover = () => {
 
     const resultRef = useRef(null);
 
-    const {resultList,setResultList,resultLoading, setResultLoading} = useResultList(selectedGenre);
-    
+    const { resultList, setResultList, resultLoading, setResultLoading } = useResultList(selectedGenre);
+
 
     return (
         <div className={styles.discover_container}>
@@ -93,9 +94,12 @@ const Discover = () => {
                     <div className={styles.discover_result_container}>
                         {(resultLoading ? Array.from(new Array(10)) : resultList).map((list, index) => (
                             list?.id ? (
-                                <div className={styles.result_container} key={`result_container_${index}`} onClick={() => {window.location.href = `/movie/${list?.id}`}}>
+                                <div className={styles.result_container} key={`result_container_${index}`} onClick={() => { window.location.href = `/movie/${list?.id}` }}>
                                     <div className={styles.result_content}>
-                                        <img src={IMG_URL + list?.poster_path} />
+                                        <div className={styles.result_backdrop_container}>
+                                            <LazyLoadImage src={IMG_URL + list?.poster_path} wrapperClassName={styles.result_content_backdrop} effect="opacity" />
+                                        </div>
+                                        {/* <img src={IMG_URL + list?.poster_path} /> */}
                                         <div className={styles.result_detail_container}>
                                             <div className={styles.detail_movie_name}>{list?.title}</div>
                                             <div className={styles.detail_movie_year}>({convertDateToYear(list?.release_date)})</div>

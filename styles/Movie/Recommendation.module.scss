@@ -14,19 +14,20 @@
 
 .movie_recommendation_content {
   display: flex;
-  align-items: center;
+  // align-items: center;
   flex-wrap: nowrap;
 }
 
 .movie_recommendation_card_container {
   // position: relative;
   // min-width: 300px;
-  height: 180px;
+  // height: 180px;
+  height: 100%;
   padding-right: 1.5rem;
 
   @media only screen and (max-width: 962px) {
     // min-width: 200px;
-    height: 120px;
+    // height: 120px;
     padding-right: 1.25rem;
   }
 
@@ -38,22 +39,37 @@
   }
 }
 
-.recommendation_backdrop {
+.recommendation_backdrop_container {
   width: 300px;
+  height: 180px;
+  background-color: $black-chinese-bright;
+  border-radius: 9px;
   @media only screen and (max-width: 962px) {
     width: 200px;
+    height: 120px;
+  }
+}
+
+.recommendation_backdrop {
+  width: 100%;
+  height: 100%;
+
+  img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    object-position: center center;
+    border-radius: 9px;
+    transition: transform 0.3s ease 0s, margin-bottom 0.3s ease 0s;
   }
 
-  height: 100%;
-  object-fit: cover;
-  object-position: center center;
-  border-radius: 9px;
-  transition: transform 0.3s ease 0s, margin-bottom 0.3s ease 0s;
   cursor: pointer;
 
   &:hover {
-    transform: scale(1.05);
-    margin-bottom: 4px;
+    img {
+      transform: scale(1.05);
+      margin-bottom: 4px;
+    }
 
     @media only screen and (max-width: 962px) {
       margin-bottom: 4px;

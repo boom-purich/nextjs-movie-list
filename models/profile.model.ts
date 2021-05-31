@@ -1,4 +1,5 @@
 import * as yup from 'yup';
+import { v4 as uuidv4 } from 'uuid';
 
 export class ImageProfile {
     isOpenCropModal:boolean;
@@ -26,3 +27,27 @@ export const SettingProfileSchema = yup.object({
     firstname: yup.string().min(1,'Please fill firstname.').required('Please fill firstname.'),
     lastname: yup.string().min(1,'Please fill lastname.').required('Please fill lastname.')
 });
+
+export class User {
+    id: string;
+    email?: string;
+    password?: string;
+    first_name?: string;
+    last_name?: string;
+    method?:string;
+    img_url?: any;
+    like_movies?: Array<string>;
+    love_movies?: Array<string>;
+
+    constructor() {
+        this.id = '';
+        this.email = '';
+        this.password = '';
+        this.first_name = '';
+        this.last_name = '';
+        this.method = '';
+        this.img_url = '';
+        this.like_movies = [];
+        this.love_movies = [];
+    }
+}

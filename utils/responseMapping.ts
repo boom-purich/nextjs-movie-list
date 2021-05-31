@@ -9,4 +9,12 @@ const responseMapping = (data?:any):Response => {
     }
 }
 
-export default responseMapping;
+const errorFireBaseMapping = (error?:any):Response => {
+    return {
+        resultCode: '50000',
+        resultData: error?.code,
+        resultDescription: error?.message,
+    }
+}
+
+export {responseMapping,errorFireBaseMapping};

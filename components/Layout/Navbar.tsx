@@ -1,22 +1,34 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/router';
 import { useSelector, useDispatch } from 'react-redux';
 import Link from 'next/link';
 import styles from 'styles/Layout/Navbar.module.scss';
 import Search from './Search';
 import type { RootState } from 'redux/store';
+import Popover from '@material-ui/core/Popover';
 
 const Navbar = () => {
 
     const dispatch = useDispatch();
-    const { user } = useSelector((state:RootState) => state);
+    const { user } = useSelector((state: RootState) => state);
     const router = useRouter();
-    const [isShowModal, setIsShowModal] = useState(false);
+    const [isShowModal, setIsShowModal] = useState<boolean>(false);
     const [searchKeyword, setSearchKeyword] = useState('');
+    const [showPopover, setShowPopover] = useState<boolean>(true);
     const searchingKeyword = () => {
-        router.push({ pathname: '/search', query: { keyword: searchKeyword } });
-        setSearchKeyword("");
-        setIsShowModal(false);
+        if(searchKeyword) {
+            router.push({ pathname: '/search', query: { keyword: searchKeyword } });
+            setSearchKeyword("");
+            setIsShowModal(false);
+        }else{
+            setShowPopover(true);
+        }
+        
+    }
+    const searchBoxRef = useRef(null);
+
+    const handleClosePopover = () => {
+        setShowPopover(false);
     }
 
     useEffect(() => {
@@ -78,7 +90,7 @@ const Navbar = () => {
                     <div className={`${styles.navbar_modal_container}`}>
                         <div>
                             <div className={styles.find_movie_word}>Find your movie</div>
-                            <div className={styles.modal_search_container}>
+                            <div className={styles.modal_search_container} ref={searchBoxRef}>
                                 <input type="text" className={styles.search_field} placeholder="Search movie" value={searchKeyword} onChange={event => setSearchKeyword(event.target.value)} onKeyPress={event => { event.charCode === 13 && searchingKeyword() }} />
                                 <button type="button" className={styles.clear_btn} onClick={() => setSearchKeyword("")} style={{ visibility: searchKeyword ? 'visible' : 'hidden' }}>
                                     <i className={`fas fa-times-circle my-auto ${styles.clear_logo}`}></i>
@@ -86,15 +98,21 @@ const Navbar = () => {
                                 <button type="button" className={styles.search_btn} onClick={searchingKeyword}>
                                     <i className={`fas fa-search ${styles.search_logo}`}></i>
                                 </button>
-                                {/* <button type="button" className={styles.search_btn} onClick={searchingKeyword}>
-                                    <i className={`fas fa-search ${styles.search_logo}`}></i>
-                                </button>
-                                <input type="text" className={styles.search_field} placeholder="Search movie" value={searchKeyword} onChange={event => setSearchKeyword(event.target.value)} onKeyPress={event => { event.charCode === 13 && searchingKeyword() }} />
-                                <button type="button" className={styles.clear_btn} onClick={() => setSearchKeyword("")} style={{ visibility: searchKeyword ? 'visible' : 'hidden' }}>
-                                    <i className={`fas fa-times-circle my-auto ${styles.clear_logo}`}></i>
-                                </button> */}
-
                             </div>
+                            <Popover
+                                open={showPopover}
+                                onClose={handleClosePopover}
+                                anchorEl={showPopover ? searchBoxRef.current : null}
+                                anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
+                                transformOrigin={{ vertical: 'top', horizontal: 'left' }}
+                                className="search_popover_container"
+                            >
+                                <div className={styles.popover_content}>
+                                    <div>Please Fill keyword</div>
+                                    <i className="fas fa-times-circle" onClick={handleClosePopover}></i>
+                                </div>
+                            </Popover>
+
                         </div>
                         <div className={styles.modal_btn_group}>
                             <Link href='/login'>

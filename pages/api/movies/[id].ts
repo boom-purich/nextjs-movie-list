@@ -1,5 +1,5 @@
 import axios from 'axios';
-import responseMapping from 'utils/responseMapping';
+import {responseMapping} from 'utils/responseMapping';
 
 const movieHandler = async({query:{id}},res) => {
     try{

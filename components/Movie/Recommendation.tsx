@@ -1,5 +1,6 @@
 import styles from 'styles/Movie/Recommendation.module.scss';
 import ScrollContainer from 'react-indiana-drag-scroll';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 const Recommendation = ({ recommends }) => {
 
@@ -12,10 +13,14 @@ const Recommendation = ({ recommends }) => {
                 <div className={styles.movie_recommendation_content}>
                     {
                         recommends && recommends.map((list, index) => (
-                            <div className={styles.movie_recommendation_card_container} key={`recommendation_card_${index}`} onClick={() => {window.location.href = `/movie/${list?.id}`}}>
+                            <div className={styles.movie_recommendation_card_container} key={`recommendation_card_${index}`} onClick={() => { window.location.href = `/movie/${list?.id}` }}>
                                 {
-                                    list?.backdrop_path ? <img src={IMG_URL+list?.backdrop_path} alt="" className={styles.recommendation_backdrop} />
-                                    : <div className={styles.no_backdrop_recommendation}><i className={`fas fa-image ${styles.image_logo}`}></i></div>
+                                    list?.backdrop_path ?
+                                        <div className={styles.recommendation_backdrop_container}>
+                                            <LazyLoadImage src={IMG_URL + list?.backdrop_path} alt={`recommendation_${list?.title}_backdrop`} wrapperClassName={styles.recommendation_backdrop} effect="opacity" />
+                                        </div>
+                                        // <img src={IMG_URL+list?.backdrop_path} alt="" className={styles.recommendation_backdrop} />
+                                        : <div className={styles.no_backdrop_recommendation}><i className={`fas fa-image ${styles.image_logo}`}></i></div>
                                 }
                                 <div className={styles.separate_line}></div>
                                 <div className={styles.recommendation_movie_name}>{list?.title}</div>

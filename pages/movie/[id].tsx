@@ -7,63 +7,63 @@ import Trailer from 'components/Movie/Trailer';
 import Recommendation from 'components/Movie/Recommendation';
 import axios from 'axios';
 import moment from 'moment';
-import {Movie}  from 'models/movie.model';
+import { Movie } from 'models/movie.model';
 import { IsoLanguageCode } from 'models/language.model';
-import { convertDateToYear,convertRuntime } from 'utils/convertTime';
+import { convertDateToYear, convertRuntime } from 'utils/convertTime';
 
-const MovieComponent = ({movie,cast,crew,trailer,watches,recommends}) => {
-    
+const MovieComponent = ({ movie, cast, crew, trailer, watches, recommends }) => {
+
     const IMG_URL = 'https://image.tmdb.org/t/p/original';
 
-    const directorName = (crew:any):string => {
-        let name:string = '';
+    const directorName = (crew: any): string => {
+        let name: string = '';
         crew && (name = crew.filter(list => list.job === 'Director')[0].name);
         return name;
     }
 
-    const convertCodeToLanguage = (language_code:string) => {
-        let name:string = '';
+    const convertCodeToLanguage = (language_code: string) => {
+        let name: string = '';
         language_code && (name = IsoLanguageCode[language_code]?.name);
         return name;
     }
 
     return (
-        
+
         <div className={styles.movie_container}>
             <Head>
                 <title>{movie?.title} - Movie List</title>
             </Head>
             <div className={styles.movie_backdrop_container}>
-                <img className={styles.movie_backdrop} src={IMG_URL+movie?.backdrop_path} />
+                <img className={styles.movie_backdrop} src={IMG_URL + movie?.backdrop_path} />
                 <div className={styles.movie_content}>
                     <div className={styles.movie_poster_topic_container}>
                         <div className={styles.movie_poster_container}>
-                            <img className={styles.movie_poster} src={IMG_URL+movie?.poster_path} />
+                            <img className={styles.movie_poster} src={IMG_URL + movie?.poster_path} />
                         </div>
                         <div className={styles.movie_topic_container}>
                             <div className={styles.movie_header_year_container}>
                                 <div className={styles.header_name}>{movie?.title}</div>
-                                <div className={styles.year_name}>({ convertDateToYear(movie?.release_date)})</div>
+                                <div className={styles.year_name}>({convertDateToYear(movie?.release_date)})</div>
                                 <div className={styles.separate_line}></div>
                             </div>
                             <div className={styles.movie_overview_container}>
                                 <div className={styles.overview_header}>Overview</div>
                                 <div className={styles.overview_detail}>
                                     {movie?.overview}
-                            </div>
+                                </div>
                             </div>
                             <div className={styles.movie_genre_crew_container}>
                                 <div className={styles.genre_container}>
                                     <div className={styles.genre_header}>Genre</div>
-                                    <div className={styles.genre_detail}>{ movie?.genres && movie?.genres.map(list => list.name).join(', ') }</div>
+                                    <div className={styles.genre_detail}>{movie?.genres && movie?.genres.map(list => list.name).join(', ')}</div>
                                 </div>
                                 <div className={styles.genre_container}>
                                     <div className={styles.genre_header}>Duration</div>
-                                    <div className={styles.genre_detail}>{ convertRuntime(movie?.runtime) }</div>
+                                    <div className={styles.genre_detail}>{convertRuntime(movie?.runtime)}</div>
                                 </div>
                                 <div className={styles.genre_container}>
                                     <div className={styles.genre_header}>Language</div>
-                                    <div className={styles.genre_detail}>{ convertCodeToLanguage(movie?.original_language) }</div>
+                                    <div className={styles.genre_detail}>{convertCodeToLanguage(movie?.original_language)}</div>
                                 </div>
                                 <div className={styles.genre_container}>
                                     <div className={styles.genre_header}>Director</div>
@@ -74,9 +74,9 @@ const MovieComponent = ({movie,cast,crew,trailer,watches,recommends}) => {
                                 <div className={styles.movie_available_container}>
                                     <div className={styles.available_header}>Available on</div>
                                     <div className={styles.available_logo_group}>
-                                        { watches && watches.map((list,index) => (
-                                            <img src={IMG_URL+list?.logo_path} key={`watch_provider_logo_${index}`} className={styles.available_logo} />
-                                        ))}         
+                                        {watches && watches.length > 0 ? watches.map((list, index) => (
+                                            <img src={IMG_URL + list?.logo_path} key={`watch_provider_logo_${index}`} className={styles.available_logo} />
+                                        )) : <div className={styles.no_provider}>No Provider</div>}
                                     </div>
                                 </div>
                                 <div className={styles.movie_btn_group_container}>
@@ -95,10 +95,10 @@ const MovieComponent = ({movie,cast,crew,trailer,watches,recommends}) => {
                         <div className={styles.movie_detail_container}>
                             <div className={styles.movie_separate_line}></div>
                             <div className={styles.movie_detail_content}>
-                                <CastComponent {...{cast}} />
-                                <CrewComponent {...{crew}} />
-                                <Trailer {...{trailer}}/>
-                                <Recommendation {...{recommends}}/>
+                                <CastComponent {...{ cast }} />
+                                <CrewComponent {...{ crew }} />
+                                <Trailer {...{ trailer }} />
+                                <Recommendation {...{ recommends }} />
                             </div>
                         </div>
                     </div>
@@ -108,20 +108,20 @@ const MovieComponent = ({movie,cast,crew,trailer,watches,recommends}) => {
     );
 }
 
-export const getServerSideProps: GetServerSideProps = async ({params:{id}}) => {
+export const getServerSideProps: GetServerSideProps = async ({ params: { id } }) => {
     const baseUrl = (process.env.NODE_ENV === 'development' ? process.env.API_DEVELOPMENT_URL : process.env.API_PRODUCTION_URL) + `/api/movies`;
-    const {data:{resultData}} = await axios.get(`${baseUrl}/${id}`);
+    const { data: { resultData } } = await axios.get(`${baseUrl}/${id}`);
     const castCrewData = await axios.get(`${baseUrl}/credits?movie_id=${id}`);
     const trailerList = await axios.get(`${baseUrl}/trailer/${id}`);
     const recommendList = await axios.get(`${baseUrl}/recommendations/${id}`);
     const watchProviderList = await axios.get(`${baseUrl}/watch/${id}`);
-    const movie:Movie = resultData;
-    const { cast,crew } = castCrewData?.data.resultData;
+    const movie: Movie = resultData;
+    const { cast, crew } = castCrewData?.data.resultData;
     const trailer = trailerList?.data?.resultData[0] || {};
     const recommends = recommendList?.data?.resultData || [];
     const watches = watchProviderList?.data?.resultData || [];
     return {
-        props:{
+        props: {
             movie,
             cast,
             crew,

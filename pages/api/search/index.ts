@@ -1,4 +1,4 @@
-import responseMapping from 'utils/responseMapping';
+import {responseMapping} from 'utils/responseMapping';
 import axios from 'axios';
 
 

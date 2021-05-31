@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Slide from '@material-ui/core/Slide';
@@ -7,11 +8,51 @@ import { convertDateToYear } from 'utils/convertTime';
 const NewMovieModal = ({ isOpenModal, setIsOpenModal, movie }) => {
 
     const IMG_URL = 'https://image.tmdb.org/t/p/original';
+    const [isLoad, setIsLoad] = useState<boolean>(false);
+    const [isOpenMovieModal, setIsOpenMovieModal] = useState<boolean>(false);
+
+    const handleLoading = (event) => {
+        // console.log('Event : ', event);
+    }
+
+    const checkImageLoad = (url) => {
+
+        const [imageLoading, setImageLoading] = useState<boolean>(true);
+        useEffect(() => {
+            const loadingImage = (url) => {
+                if(url || url !== null) {
+                    const loadImg = new Image();
+                    loadImg.src = IMG_URL + url;
+    
+                    loadImg.onload = () => {
+                        setImageLoading(false);
+                    }
+                }else{
+                    setImageLoading(false);
+                }
+                
+            }
+
+            loadingImage(url);
+        }, [url])
+
+        return {
+            imageLoading,
+            setImageLoading
+        }
+    }
+
+    const handleCloseModal = () => {
+        setIsOpenModal(false);
+        setImageLoading(true);
+    }
+
+    const { imageLoading,setImageLoading } = checkImageLoad(movie?.backdrop_path);
 
     return (
         <Modal
-            open={isOpenModal}
-            onClose={() => setIsOpenModal(false)}
+            open={isOpenModal && !imageLoading}
+            onClose={handleCloseModal}
             closeAfterTransition
             className={movieModalStyles.movie_modal_container}
             BackdropComponent={Backdrop}
@@ -23,7 +64,8 @@ const NewMovieModal = ({ isOpenModal, setIsOpenModal, movie }) => {
                 <div className={movieModalStyles.movie_modal_content}>
                     <div className={movieModalStyles.movie_backdrop_container}>
                         {
-                            movie?.backdrop_path ? <img src={IMG_URL + movie?.backdrop_path} className={movieModalStyles.movie_backdrop} />
+                            movie?.backdrop_path ?
+                                <img src={IMG_URL + movie?.backdrop_path} className={movieModalStyles.movie_backdrop} />
                                 :
                                 <div className={movieModalStyles.no_backdrop_container}>
                                     <i className={`fas fa-image ${movieModalStyles.image_icon}`}></i>

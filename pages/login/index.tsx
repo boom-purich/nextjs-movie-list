@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState,useEffect } from 'react';
 import Link from 'next/link';
 import { Formik } from 'formik'
 import { LoginField, LoginSchema } from 'models/authentication.model';
@@ -8,19 +8,24 @@ import Slide from '@material-ui/core/Slide';
 import { TransitionProps } from '@material-ui/core/transitions';
 import styles from 'styles/Layout/Login.module.scss';
 import { Snackbar } from '@material-ui/core';
+import firebase from '../../firebase/initFirebase';
+import { User } from 'firestore/write';
+
+firebase();
 
 const Login = () => {
 
+    const userService = new User();
     const [isShowPassword, setIsShowPassword] = useState<boolean>(false);
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [isSuccessAuthorize, setIsSuccessAuthorize] = useState<any>({open:false,Transition:Fade,success:false});
-
+    const [loadingImage,setLoadingImage] = useState<boolean>(false);
     const SlideTransition = (props: TransitionProps) => {
         return <Slide {...props} direction="down" />;
     }
 
     const handleSubmit = async (value: any, action: any) => {
-        console.log('Value : ', value)
+        console.log('Value : ', value);
         setIsLoading(true);
         setIsSuccessAuthorize({...isSuccessAuthorize,open:true,success:false,Transition:SlideTransition});
     }
@@ -29,6 +34,21 @@ const Login = () => {
         setIsSuccessAuthorize({...isSuccessAuthorize,open:false});
         setIsLoading(false);
     }
+
+    const loginWithGoogle = async() => {
+        // const isCreateSuccess = await userService.createUserWithAnotherMethod();
+        // console.log('Is Create Success : ',isCreateSuccess);
+        // const auth = firebase.getAuth();
+        // console.log('Auth : ',auth);
+    }
+
+    const loginWithFacebook = async() => {
+
+    }
+
+    // useEffect(() => {
+
+    // },[loadingImage])
 
     return (
         <>
@@ -111,15 +131,15 @@ const Login = () => {
                         </div>
 
                         <div className={styles.sign_in_method_btn_group}>
-                            <button type="button">
+                            <button type="button" onClick={loginWithGoogle}>
                                 <img src="image/icons/google.svg" className={styles.method_logo} />
                             </button>
-                            <button type="button">
+                            <button type="button" onClick={loginWithFacebook}>
                                 <img src="image/icons/facebook.svg" className={styles.method_logo} />
                             </button>
-                            <button type="button">
+                            {/* <button type="button">
                                 <img src="image/icons/LINE.svg" className={styles.method_logo} />
-                            </button>
+                            </button> */}
                         </div>
                     </div>
                     <div className={styles.sign_up_container}>
