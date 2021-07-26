@@ -16,14 +16,14 @@ const Navbar = () => {
     const [searchKeyword, setSearchKeyword] = useState('');
     const [showPopover, setShowPopover] = useState<boolean>(true);
     const searchingKeyword = () => {
-        if(searchKeyword) {
+        if (searchKeyword) {
             router.push({ pathname: '/search', query: { keyword: searchKeyword } });
             setSearchKeyword("");
             setIsShowModal(false);
-        }else{
+        } else {
             setShowPopover(true);
         }
-        
+
     }
     const searchBoxRef = useRef(null);
 
@@ -118,8 +118,8 @@ const Navbar = () => {
                             <Link href='/login'>
                                 <div className={styles.modal_btn_option}>
                                     <i className={`fas fa-sign-in-alt ${styles.btn_logo}`}></i>
-                            Login
-                        </div>
+                                    Login
+                                </div>
                             </Link>
                             <Link href="/register">
                                 <div className={styles.modal_btn_option}>
@@ -128,8 +128,8 @@ const Navbar = () => {
                             </Link>
                             <div className={styles.modal_btn_option}>
                                 <i className={`fas fa-sign-out-alt ${styles.btn_logo}`}></i>
-                    Logout
-                    </div>
+                                Logout
+                            </div>
                         </div>
                     </div>
                 </>
